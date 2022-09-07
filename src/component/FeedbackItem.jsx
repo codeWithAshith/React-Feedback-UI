@@ -1,14 +1,13 @@
 import React, { useState } from "react";
+import Card from "./shared/Card";
 
-const FeedbackItem = () => {
-  const [rating, setRating] = useState(10);
-  const [text, setText] = useState("This is an example of FeedbackItem");
+const FeedbackItem = ({item}) => {
 
   return (
-    <div className="card">
-      <div className="num-display">{rating}</div>
-      <div className="text-display">{text}</div>
-    </div>
+    <Card reverse={true}>
+      <div className="num-display">{item.rating}</div>
+      <div className="text-display">{item.text}</div>
+    </Card>
   );
 };
 
