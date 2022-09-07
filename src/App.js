@@ -1,5 +1,4 @@
 import { useState } from "react";
-import FeedbackItem from "./component/FeedbackItem";
 import FeedbackData from "./data/FeedbackData";
 import Header from "./component/Header";
 import FeedbackList from "./component/FeedbackList";
@@ -14,6 +13,11 @@ const App = () => {
       setFeedback(feedback.filter((feedback) => feedback.id !== id));
   };
 
+  const handleAddFeedback = (newFeedback) => {
+    console.log(newFeedback);
+    setFeedback([newFeedback, ...feedback]);
+  };
+
   return (
     <>
       <Header
@@ -22,7 +26,10 @@ const App = () => {
         textColor="#ff6a95"
       />
       <div className="container">
-        <FeedbackForm />
+        <FeedbackForm
+          handleAddFeedback={handleAddFeedback}
+          feedback={feedback}
+        />
         <FeedbackStats feedback={feedback} />
         <FeedbackList
           feedback={feedback}
