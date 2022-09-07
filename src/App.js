@@ -1,42 +1,28 @@
-import { useState } from "react";
-import FeedbackData from "./data/FeedbackData";
-import Header from "./component/Header";
-import FeedbackList from "./component/FeedbackList";
-import FeedbackStats from "./component/FeedbackStats";
-import FeedbackForm from "./component/FeedbackForm";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import Header from "./components/Header";
+import AboutPage from "./pages/AboutPage";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
-  const [feedback, setFeedback] = useState(FeedbackData);
-
-  const handleDeleteFeedback = (id) => {
-    if (window.confirm("Are you sure you wanna delete?"))
-      setFeedback(feedback.filter((feedback) => feedback.id !== id));
-  };
-
-  const handleAddFeedback = (newFeedback) => {
-    console.log(newFeedback);
-    setFeedback([newFeedback, ...feedback]);
-  };
-
   return (
-    <>
-      <Header
-        text="Feedback UI"
-        bgColor="rgba(0,0,0,0.4)"
-        textColor="#ff6a95"
-      />
-      <div className="container">
-        <FeedbackForm
-          handleAddFeedback={handleAddFeedback}
-          feedback={feedback}
+    <BrowserRouter>
+      <>
+        <Header
+          text="Feedback UI"
+          bgColor="rgba(0,0,0,0.4)"
+          textColor="#ff6a95"
         />
-        <FeedbackStats feedback={feedback} />
-        <FeedbackList
-          feedback={feedback}
-          handleDeleteFeedback={handleDeleteFeedback}
-        />
-      </div>
-    </>
+        <div className="container">
+          <Routes>
+            <Route exact path="/" element={<HomePage />} />
+
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </div>
+
+      </>
+    </BrowserRouter>
   );
 };
 
