@@ -3,9 +3,16 @@ import FeedbackItem from "./component/FeedbackItem";
 import FeedbackData from "./data/FeedbackData";
 import Header from "./component/Header";
 import FeedbackList from "./component/FeedbackList";
+import FeedbackStats from "./component/FeedbackStats";
 
 const App = () => {
-  const [feedback, setFeedback] = useState(FeedbackData)
+  const [feedback, setFeedback] = useState(FeedbackData);
+
+  const handleDeleteFeedback = (id) => {
+    if (window.confirm("Are you sure you wanna delete?"))
+      setFeedback(feedback.filter((feedback) => feedback.id !== id));
+  };
+
   return (
     <>
       <Header
@@ -14,7 +21,11 @@ const App = () => {
         textColor="#ff6a95"
       />
       <div className="container">
-        <FeedbackList feedback={feedback} />
+        <FeedbackStats feedback={feedback} />
+        <FeedbackList
+          feedback={feedback}
+          handleDeleteFeedback={handleDeleteFeedback}
+        />
       </div>
     </>
   );
